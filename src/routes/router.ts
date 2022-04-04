@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import fastifyCors from "fastify-cors";
+import ScrapperController from "../controllers/scrapper.controller";
 
 const fast = fastify({ logger: true });
 
@@ -11,5 +12,7 @@ fast.register(fastifyCors, {
 fast.get("/", async () => {
   return "API Linkedin Scrapper";
 });
+
+fast.post("/scrap/profiles", ScrapperController.login);
 
 export { fast };
