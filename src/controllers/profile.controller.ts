@@ -77,7 +77,7 @@ class ProfileController {
    * Listado de perfiles
    */
   static async getProfileList(request: any, reply: any) {
-    const profileList = await ProfileModel.find({});
+    const profileList = await ProfileModel.find({}).sort("name");
 
     return reply.status(200).send({ success: true, profileList });
   }

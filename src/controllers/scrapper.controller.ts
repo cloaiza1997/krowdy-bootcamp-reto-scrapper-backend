@@ -66,7 +66,9 @@ class ScrapperController extends PuppeteerController {
 
     // Información
     profile.avatar = await this.getAttributeByXPath(profileInfo.avatar, "src");
-    profile.name = await this.getTextContentByQuerySelector(profileInfo.name);
+    profile.name = (
+      await this.getTextContentByQuerySelector(profileInfo.name)
+    )?.toUpperCase();
     profile.position = await this.getTextContentByXPath(profileInfo.position);
     profile.location = await this.getTextContentByXPath(profileInfo.location);
 

@@ -31,6 +31,10 @@ class PuppeteerController {
       args: ["--no-sandbox"], //
     });
     this.page = await this.browser.newPage();
+    await this.page.setGeolocation({
+      latitude: 3.3952332,
+      longitude: 76.595704,
+    });
   }
 
   static async closePage() {
