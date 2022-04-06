@@ -13,6 +13,13 @@ class PuppeteerController {
 
   /**
    * Páginas
+   *
+   * Para desplegar la aplicación con puppeteer en heroku se debe de instalar el paquete en el servidor de heroku:
+   *
+   * heroku buildpacks:add jontewks/puppeteer -a <app_name>
+   *
+   * @see https://www.youtube.com/watch?v=Kl7mqpAK-bk&t=267s&ab_channel=ReactNativeTutorial
+   * @see https://github.com/jontewks/puppeteer-heroku-buildpack
    */
   static async openPage() {
     this.browser = await puppeteer.launch({
