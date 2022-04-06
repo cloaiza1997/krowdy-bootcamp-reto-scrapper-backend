@@ -30,8 +30,8 @@ class PuppeteerController {
   }
 
   static async closePage() {
-    this.page.close();
-    this.browser.close();
+    await this.page.close();
+    await this.browser.close();
   }
 
   static async getPageTitle() {
