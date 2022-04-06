@@ -87,7 +87,7 @@ class ScrapperController extends PuppeteerController {
       )
     );
 
-    profile.linkeding = profileLink;
+    profile.linkedin = profileLink;
     profile.phone = await this.getTextContentByXPath(profileInfo.phone);
     profile.address = await this.getTextContentByXPath(profileInfo.address);
     profile.email = await this.getTextContentByXPath(profileInfo.email);
@@ -181,14 +181,18 @@ class ScrapperController extends PuppeteerController {
     const totalResultsText = subtitle?.replace(/([^\d])/gim, "");
     const totalResults = parseInt(totalResultsText || "", 10);
 
-    // Se espera hasta que cargue la sección de la paginación
-    await this.page.waitForSelector(pagination.listPages);
+    let lastPage = 1;
 
-    // Última página de la paginación
-    const lastPageText = await this.getTextContentByQuerySelector(
-      pagination.lastPage
-    );
-    const lastPage = parseInt(lastPageText || "", 10);
+    // + Se espera hasta que cargue la sección de la paginación
+    if (totalResults > 10) {
+      await this.page.waitForSelector(pagination.listPages);
+
+      // Última página de la paginación
+      const lastPageText = await this.getTextContentByQuerySelector(
+        pagination.lastPage
+      );
+      lastPage = parseInt(lastPageText || "", 10);
+    }
 
     // Se extrae el listado de resultados de la página, obtiendo el botón que contiene la url del perfil de cada resultado
     const profilesListHandler = await this.getElementByQuerySelectorAll(
