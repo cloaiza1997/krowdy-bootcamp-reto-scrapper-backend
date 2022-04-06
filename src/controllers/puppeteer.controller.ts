@@ -1,9 +1,11 @@
-import puppeteer, {
+import {
   Browser,
   ElementHandle,
   Page,
   PuppeteerLifeCycleEvent,
 } from "puppeteer";
+import puppeteer from "puppeteer-extra";
+import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
 class PuppeteerController {
   static browser: Browser;
@@ -22,6 +24,8 @@ class PuppeteerController {
    * @see https://github.com/jontewks/puppeteer-heroku-buildpack
    */
   static async openPage() {
+    puppeteer.use(StealthPlugin());
+
     this.browser = await puppeteer.launch({
       headless: true,
       args: ["--no-sandbox"], //
