@@ -20,12 +20,22 @@ class PuppeteerController {
     return await this.page.$(querySelector);
   }
 
+  static async getElementByQuerySelectorAll(querySelector: string) {
+    return await this.page.$$(querySelector);
+  }
+
   static async getElementByXPath(xPath: string) {
     return await this.page.$x(xPath);
   }
 
   static async getPageTitle() {
     return this.page.title();
+  }
+
+  static async getTextContentByQuerySelector(querySelector: string) {
+    const elementHandler = await this.getElementByQuerySelector(querySelector);
+
+    return await elementHandler?.evaluate(({ textContent }) => textContent);
   }
 
   static async goTo(pageUrl: string) {
@@ -35,6 +45,24 @@ class PuppeteerController {
   static async openPage() {
     this.browser = await puppeteer.launch();
     this.page = await this.browser.newPage();
+  }
+
+  static async scrollingDown() {
+    await this.page.evaluate(() => {
+      const scroll = () => {
+        const { scrollHeight } = document.body;
+
+        window.scrollBy(0, scrollHeight);
+
+        const newScrollHeight = document.body.scrollHeight;
+
+        if (newScrollHeight > scrollHeight) {
+          scroll();
+        }
+      };
+
+      scroll();
+    });
   }
 
   static async typeInput(element: ElementHandle | null, text: string = "") {

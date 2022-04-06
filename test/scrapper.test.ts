@@ -1,19 +1,22 @@
+import axios from "axios";
 import { expect } from "chai";
-import ScrapperController from "../src/controllers/scrapper.controller";
-import Response from "../src/shared/models/Response";
+import { start, end } from "../src/services/api";
 
 before(async () => {
-  await ScrapperController.openPage();
+  start();
 });
 
 after(async () => {
-  await ScrapperController.closePage();
+  end();
 });
 
 describe("LINKEDIN SCRAPPER TEST", async () => {
-  it("Login", async () => {
-    const response = await ScrapperController.login();
+  it("Scrap profiles", async () => {
+    const response = await axios.post("http://localhost:5000/scrap/profiles", {
+      keyword: "fullstack",
+      totalPages: 1,
+    });
 
-    expect(response).equal(true);
+    expect(response.data.success).equal(true);
   });
 });

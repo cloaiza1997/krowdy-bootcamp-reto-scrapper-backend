@@ -13,6 +13,8 @@ fast.get("/", async () => {
   return "API Linkedin Scrapper";
 });
 
-fast.post("/scrap/profiles", ScrapperController.login);
+fast.post("/scrap/profiles", (request, reply) =>
+  ScrapperController.scrapLinkedin(request, reply)
+);
 
 export { fast };
