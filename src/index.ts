@@ -1,3 +1,3 @@
-import start from "./services/api";
+import { start } from "./services/api";
 
 start();

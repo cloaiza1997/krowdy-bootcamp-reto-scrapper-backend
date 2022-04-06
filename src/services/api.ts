@@ -10,4 +10,8 @@ const start = async () => {
   }
 };
 
-export default start;
+const end = async () => {
+  await fast.close();
+};
+
+export { start, end };
