@@ -1,12 +1,13 @@
 import fastify from "fastify";
 import fastifyCors from "fastify-cors";
+import ProfileController from "../controllers/profile.controller";
 import ScrapperController from "../controllers/scrapper.controller";
 
 const fast = fastify({ logger: true });
 
 fast.register(fastifyCors, {
   origin: "*",
-  methods: ["POST", "GET"],
+  methods: ["POST", "GET", "DELETE"],
 });
 
 fast.get("/", async () => {
@@ -15,6 +16,14 @@ fast.get("/", async () => {
 
 fast.post("/scrap/profiles", (request, reply) =>
   ScrapperController.scrapLinkedin(request, reply)
+);
+
+fast.get("/profiles", (request, reply) =>
+  ProfileController.getProfileList(request, reply)
+);
+
+fast.delete("/profiles", (request, reply) =>
+  ProfileController.deleteAllProfiles(request, reply)
 );
 
 export { fast };

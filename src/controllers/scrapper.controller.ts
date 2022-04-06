@@ -6,6 +6,7 @@ import {
   LINKEDIN_URL_SEARCH_PEOPLE,
 } from "../shared/utils/consts";
 import { homologateString } from "../shared/utils/functions";
+import ProfileController from "./profile.controller";
 import PuppeteerController from "./puppeteer.controller";
 
 const {
@@ -273,6 +274,11 @@ class ScrapperController extends PuppeteerController {
     );
 
     await this.closePage();
+
+    // Almacena los perfiles encontrados en la base de datos
+    const profileController = new ProfileController();
+
+    await profileController.createManyProfiles(profileList);
 
     return reply.status(200).send({ ...result, profileList });
   }
