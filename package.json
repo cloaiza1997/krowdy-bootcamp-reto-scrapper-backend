@@ -2,10 +2,10 @@
   "name": "reto-scrapper-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "nodemon src/index.ts",
-    "start-prod": "tsc && node dist/src/index.js",
+    "start-prod": "tsc && node dist/index.js",
     "test": "mocha -r ts-node/register test/*.test.ts --timeout 100000"
   },
   "author": "",
