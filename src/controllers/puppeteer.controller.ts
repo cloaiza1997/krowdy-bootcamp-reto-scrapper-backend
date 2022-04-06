@@ -17,7 +17,7 @@ class PuppeteerController {
   static async openPage() {
     this.browser = await puppeteer.launch({
       headless: true,
-      args: ["--no-sandbox"],
+      args: ["--no-sandbox"], //
     });
     this.page = await this.browser.newPage();
   }
