@@ -6,10 +6,7 @@ import ScrapperController from "../controllers/scrapper.controller";
 const fast = fastify({ logger: true });
 
 fast.register(fastifyCors, {
-  origin: [
-    "https://krowdy-bootcamp-reto-scrapper-frontend.vercel.app",
-    "http://localhost:3000",
-  ],
+  origin: "*",
   methods: ["POST", "GET", "DELETE"],
 });
 
