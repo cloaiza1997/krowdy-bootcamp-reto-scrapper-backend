@@ -10,7 +10,7 @@ after(async () => {
   end();
 });
 
-describe("LINKEDIN SCRAPPER TEST", async () => {
+describe("LINKEDIN SCRAPPER API TEST", async () => {
   it("Scrap profiles", async () => {
     const response = await axios.post("http://localhost:5000/scrap/profiles", {
       keyword: "fullstack",
