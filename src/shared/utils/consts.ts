@@ -1,4 +1,5 @@
 export const LINKEDIN_BASE_PATH = "https://www.linkedin.com/";
+export const LINKEDIN_BASE_LOGOUT = LINKEDIN_BASE_PATH + "m/logout/";
 export const LINKEDIN_URL_SEARCH_PEOPLE =
   LINKEDIN_BASE_PATH +
   "search/results/people/?keywords=%{keyword}&page=%{page}";

@@ -7,6 +7,8 @@ import {
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
+puppeteer.use(StealthPlugin());
+
 class PuppeteerController {
   static browser: Browser;
   static page: Page;
@@ -24,17 +26,13 @@ class PuppeteerController {
    * @see https://github.com/jontewks/puppeteer-heroku-buildpack
    */
   static async openPage() {
-    puppeteer.use(StealthPlugin());
-
+    // this.browser = await puppeteer.launch();
     this.browser = await puppeteer.launch({
       headless: true,
       args: ["--no-sandbox"], //
     });
+
     this.page = await this.browser.newPage();
-    await this.page.setGeolocation({
-      latitude: 3.3952332,
-      longitude: 76.595704,
-    });
   }
 
   static async closePage() {

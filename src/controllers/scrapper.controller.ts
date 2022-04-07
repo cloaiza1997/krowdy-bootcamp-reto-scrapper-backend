@@ -4,6 +4,7 @@ import {
   LINKEDIN_BASE_PATH,
   LINKEDIN_PAGE_ELEMENTS_TEXT,
   LINKEDIN_URL_SEARCH_PEOPLE,
+  LINKEDIN_BASE_LOGOUT,
 } from "../shared/utils/consts";
 import { homologateString } from "../shared/utils/functions";
 import ProfileController from "./profile.controller";
@@ -51,6 +52,11 @@ class ScrapperController extends PuppeteerController {
     const success = title.includes(homeTitle);
 
     return success;
+  }
+
+  static async logout() {
+    await this.goTo(LINKEDIN_BASE_LOGOUT);
+    await this.waitForNav();
   }
 
   /**
@@ -234,6 +240,7 @@ class ScrapperController extends PuppeteerController {
   ) {
     // Inicio de sesión 1
     await this.openPage();
+    // TODO - Logout
     const login = await this.login({ isScrapper: false });
 
     if (!login) {
@@ -243,6 +250,8 @@ class ScrapperController extends PuppeteerController {
         .status(400)
         .send({ status: false, message: "Error al iniciar sesión" });
     }
+
+    await this.logout();
 
     // Búsqueda de perfiles
     let result!: ProfileSearchListByPageInterface;
@@ -275,6 +284,7 @@ class ScrapperController extends PuppeteerController {
       result.profilesUrlList
     );
 
+    await this.logout();
     await this.closePage();
 
     // Almacena los perfiles encontrados en la base de datos
