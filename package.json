@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "start-prod": "tsc && node dist/index.js",
-    "test": "mocha -r ts-node/register test/*.test.ts --timeout 100000"
+    "test": "mocha -r ts-node/register test/*.test.ts --timeout 30000"
   },
   "author": "",
   "license": "ISC",

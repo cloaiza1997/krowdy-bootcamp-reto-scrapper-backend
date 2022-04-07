@@ -16,16 +16,16 @@ describe("LINKEDIN SCRAPPER CONTROLLER TEST", async () => {
     expect(success).equal(true);
   });
 
-  // it("Get profiles", async () => {
-  //   const profileList = await ScrapperController.getLinkedInProfilesByList([
-  //     "https://www.linkedin.com/in/bank-test-180845236/",
-  //     "https://www.linkedin.com/in/cristian-andrés-loaiza-arias-375a82140",
-  //   ]);
+  it("Get profiles", async () => {
+    const profileList = await ScrapperController.getLinkedInProfilesByList([
+      "https://www.linkedin.com/in/bank-test-180845236/",
+      "https://www.linkedin.com/in/cristian-andrés-loaiza-arias-375a82140",
+    ]);
 
-  //   expect(profileList.length).equal(2);
-  // });
+    expect(profileList.length).equal(2);
+  });
 
-  // it("Logout", async () => {
-  //   // await ScrapperController.logout();
-  // });
+  it("Logout", async () => {
+    await ScrapperController.logout();
+  });
 });

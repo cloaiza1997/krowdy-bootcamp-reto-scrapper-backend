@@ -7,8 +7,6 @@ import {
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
-puppeteer.use(StealthPlugin());
-
 class PuppeteerController {
   static browser: Browser;
   static page: Page;
@@ -26,7 +24,8 @@ class PuppeteerController {
    * @see https://github.com/jontewks/puppeteer-heroku-buildpack
    */
   static async openPage() {
-    // this.browser = await puppeteer.launch();
+    puppeteer.use(StealthPlugin());
+
     this.browser = await puppeteer.launch({
       headless: true,
       args: ["--no-sandbox"], //
